@@ -1,0 +1,57 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px;
+    background: palegoldenrod;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-around; */
+    align-items: center;
+    width: 375px;
+    height: 525px;
+    background-color: rgb(131, 80, 179);
+    border: 15px outset rgb(226, 207, 252);
+    border-radius: 12%;
+    /* padding-top: 50px; */
+
+}
+.symbol {
+    display: flex;
+    font-size: 65px;
+    color: rgb(226, 207, 252);
+}
+.screen {
+    background-color: rgb(216, 209, 209);
+    border: 8px inset;
+    width: 320px;
+    height: 80px;
+    padding-bottom: 5px;
+}
+
+.buttonBox {
+    display: grid;
+    grid-template-columns: auto auto  auto 70px;
+    width: 336px ;
+    height: 275px;
+    background-color: rgb(131, 80, 179);
+    margin-top: 20px;
+    column-gap: 10px;
+    row-gap: 10px;
+
+    
+}
+.button {
+    background-color: rgb(226, 207, 252);
+    color: rgb(71, 71, 66);
+    font-size: 45px;
+    width: 70px;
+    height: 70px;
+    border: 2px outset;
+    border-radius: 50%;
+    text-align: center;
+    font-family:Arial, Helvetica, sans-serif
+
+}
