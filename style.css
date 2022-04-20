@@ -39,7 +39,7 @@ body {
     column-gap: 16px;
     row-gap: 10px;
 }
-.btn, .numBtn, .opBtn {
+button {
     background-color: rgb(226, 207, 252);
     color: rgb(61, 61, 58);
     font-size: 45px;
@@ -50,8 +50,18 @@ body {
     text-align: center;
     font-family:Arial, Helvetica, sans-serif
 }
-.btn:hover, .numBtn:hover, .opBtn:hover {
-    background-color: rgb(244, 236, 255);
+button:hover {
+    transform: scale(1.04);
+
+}
+.opBtn {
+    background-color: rgb(172, 175, 223);
+}
+.resets {
+    background-color: rgb(172, 223, 204);
+}
+#eval{
+    background-color: rgb(223, 172, 219);
 }
 
 a {
