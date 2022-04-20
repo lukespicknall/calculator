@@ -53,3 +53,8 @@ body {
 .btn:hover, .numBtn:hover, .opBtn:hover {
     background-color: rgb(244, 236, 255);
 }
+
+a {
+    text-decoration: none;
+    border-radius: 50%;
+}

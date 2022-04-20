@@ -38,14 +38,13 @@ opBtn.forEach((opBtn) => opBtn.addEventListener('click', () => {
     screen.textContent = inputs.join(" ");
 }));
 
+// Runs math on = click
 equals.addEventListener('click', () => {
     if(inputs.length !== 3){
         return
     }
     evaluate()
 });
-
-
 
 
 // Math Functions
