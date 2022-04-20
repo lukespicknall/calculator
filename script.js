@@ -17,23 +17,34 @@ clear.addEventListener('click', () => {
 });
 back.addEventListener('click', () => {
     inputs.pop();
-    screen.textContent = inputs.join("")
+    screen.textContent = inputs.join(" ")
 });
 decimal.addEventListener('click', () => {
     inputs.push(decimal.value)
-    screen.textContent = inputs.join("");
+    screen.textContent = inputs.join(" ");
 });
 
 
 // Listeners for number and operator buttons
 numBtn.forEach((numBtn) => numBtn.addEventListener('click', () => {
     inputs.push(numBtn.value)
-    screen.textContent = inputs.join("");
+    screen.textContent = inputs.join(" ");
 }));
 opBtn.forEach((opBtn) => opBtn.addEventListener('click', () => {
+    if(inputs.length === 3){
+        evaluate()
+    }
     inputs.push(opBtn.value)
-    screen.textContent = inputs.join("");
+    screen.textContent = inputs.join(" ");
 }));
+
+equals.addEventListener('click', () => {
+    if(inputs.length !== 3){
+        return
+    }
+    evaluate()
+});
+
 
 
 
@@ -66,12 +77,13 @@ function operate(operator, a, b) {
             return divide(a, b)
     }
 }
-
-equals.addEventListener('click', () => {
+function evaluate() {
     let result = operate(inputs[1], Number(inputs[0]), Number(inputs[2]))
-    screen.textContent = result;
+    let roundResult = Math.round(10000000*result)/10000000; 
+    screen.textContent = roundResult;
     inputs.length = 0;
-});
+    inputs[0] = roundResult; 
+}
 
 
 // function evaluate() {
