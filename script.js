@@ -8,16 +8,22 @@ let clear = document.querySelector('#clear');
 let inputs = [];
 
 screen.textContent = "0"
+defVal();
 
-// Listeners for clear and back buttons
+// Listeners for clear, back and decimal buttons
 
 clear.addEventListener('click', () => {
     inputs.length = 0;
-    screen.textContent = "0";
+    screen.textContent = '0';
 });
 back.addEventListener('click', () => {
-    inputs.pop();
-    screen.textContent = inputs.join(" ")
+    if (inputs.length < 2) {
+        inputs.pop();
+        screen.textContent = '0';
+    } else {
+        inputs.pop();
+        screen.textContent = inputs.join(" ")
+    }
 });
 decimal.addEventListener('click', () => {
     inputs.push(decimal.value)
@@ -31,8 +37,10 @@ numBtn.forEach((numBtn) => numBtn.addEventListener('click', () => {
     screen.textContent = inputs.join(" ");
 }));
 opBtn.forEach((opBtn) => opBtn.addEventListener('click', () => {
-    if(inputs.length === 3){
+    if (inputs.length === 3) {
         evaluate()
+    } else if (inputs.length === 0 && screen.textContent == "0") {
+        return;
     }
     inputs.push(opBtn.value)
     screen.textContent = inputs.join(" ");
@@ -40,7 +48,7 @@ opBtn.forEach((opBtn) => opBtn.addEventListener('click', () => {
 
 // Runs math on = click
 equals.addEventListener('click', () => {
-    if(inputs.length !== 3){
+    if (inputs.length !== 3) {
         return
     }
     evaluate()
@@ -78,13 +86,17 @@ function operate(operator, a, b) {
 }
 function evaluate() {
     let result = operate(inputs[1], Number(inputs[0]), Number(inputs[2]))
-    let roundResult = Math.round(10000000*result)/10000000; 
+    let roundResult = Math.round(10000000 * result) / 10000000;
     screen.textContent = roundResult;
     inputs.length = 0;
-    inputs[0] = roundResult; 
+    inputs[0] = roundResult;
 }
 
-
+function defVal() {
+    if (inputs.length == 0) {
+        screen.textContent = '0';
+    }
+}
 // function evaluate() {
 //     operate(inputs[1], Number(inputs[0]), Number(inputs[2]))
 // }

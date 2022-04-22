@@ -3,7 +3,7 @@ body {
     justify-content: center;
     align-items: center;
     padding: 35px;
-    background: palegoldenrod;
+    background: palegoldenrod
 }
 .container {
     display: flex;
@@ -27,9 +27,9 @@ body {
     height: 75px;
     padding: 0px, 10px ,0px, ;
     text-align:end;
-    text-justify:auto;
     font-family:Arial, Helvetica, sans-serif;
-    font-size: 45px;
+    font-size: 50px;
+    vertical-align:text-bottom;
 }
 .buttonBox {
     display: grid;
