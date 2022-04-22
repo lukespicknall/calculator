@@ -10,14 +10,29 @@ let inputs = [];
 screen.textContent = "0"
 defVal();
 
-// Listeners for clear, back and decimal buttons
+// Listeners for clear and back buttons
 
 clear.addEventListener('click', () => {
     inputs.length = 0;
     screen.textContent = '0';
 });
 back.addEventListener('click', () => {
-    if (inputs.length < 2) {
+    let backBreak = inputs.toString();
+    if(inputs.length === 1 && backBreak.length > 1) {
+        let removed = backBreak.substring(0, backBreak.length - 1)
+        inputs.length = 0
+        inputs.push(removed);
+        screen.textContent = inputs.join(" ")
+    }else if (inputs.length === 3 && inputs[2].toString().length === 1) {
+        inputs.pop();
+        screen.textContent = inputs.join(" ")
+    } else if (inputs.length > 2){
+        let backBreak2 = inputs[2].toString();
+        let removed2 = backBreak2.substring(0, backBreak2.length - 1)
+        inputs.pop();
+        inputs.push(removed2);
+        screen.textContent = inputs.join(" ")
+    }else if (inputs.length < 2) {
         inputs.pop();
         screen.textContent = '0';
     } else {
@@ -25,22 +40,34 @@ back.addEventListener('click', () => {
         screen.textContent = inputs.join(" ")
     }
 });
-decimal.addEventListener('click', () => {
-    inputs.push(decimal.value)
-    screen.textContent = inputs.join(" ");
-});
-
 
 // Listeners for number and operator buttons
 numBtn.forEach((numBtn) => numBtn.addEventListener('click', () => {
+    if(inputs.length === 1) {
+        inputs.push(numBtn.value);
+        let joiner = inputs.splice(0, 2);
+        let secondOperand = joiner.join("")
+        inputs.push(secondOperand);
+        screen.textContent = inputs.join(" ");
+    }else if(inputs.length === 3){
+        inputs.push(numBtn.value);
+        let joiner = inputs.splice(2, 4);
+        let secondOperand = joiner.join("")
+        inputs.push(secondOperand);
+        screen.textContent = inputs.join(" ");
+    }
+    else {
     inputs.push(numBtn.value)
     screen.textContent = inputs.join(" ");
+    }
 }));
 opBtn.forEach((opBtn) => opBtn.addEventListener('click', () => {
     if (inputs.length === 3) {
         evaluate()
     } else if (inputs.length === 0 && screen.textContent == "0") {
         return;
+    } else if (inputs.length === 2){
+        return
     }
     inputs.push(opBtn.value)
     screen.textContent = inputs.join(" ");
@@ -86,14 +113,14 @@ function operate(operator, a, b) {
 }
 function evaluate() {
     let result = operate(inputs[1], Number(inputs[0]), Number(inputs[2]))
-    let roundResult = Math.round(10000000 * result) / 10000000;
+    let roundResult = Math.round(1000000 * result) / 1000000;
     screen.textContent = roundResult;
     inputs.length = 0;
     inputs[0] = roundResult;
 }
 
 function defVal() {
-    if (inputs.length == 0) {
+    if (inputs.length === 0) {
         screen.textContent = '0';
     }
 }
