@@ -8,10 +8,8 @@ let clear = document.querySelector('#clear');
 let inputs = [];
 
 screen.textContent = "0"
-defVal();
 
 // Listeners for clear and back buttons
-
 clear.addEventListener('click', () => {
     inputs.length = 0;
     screen.textContent = '0';
@@ -119,11 +117,10 @@ function evaluate() {
     inputs[0] = roundResult;
 }
 
-function defVal() {
-    if (inputs.length === 0) {
-        screen.textContent = '0';
-    }
-}
-// function evaluate() {
-//     operate(inputs[1], Number(inputs[0]), Number(inputs[2]))
+// defVal();
+// function defVal() {
+//     if (inputs.length === 0) {
+//         screen.textContent = '0';
+//     }
 // }
+
