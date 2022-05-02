@@ -1,3 +1,5 @@
+// Calculator works by building and manipulating an array  'inputs[a, b, c]'
+
 let screen = document.querySelector('.screen');
 let numBtn = document.querySelectorAll('.numBtn');
 let opBtn = document.querySelectorAll('.opBtn');
@@ -78,24 +80,55 @@ decimal.addEventListener('click', () => {
     if (screen.textContent == '0') {
         inputs.push('0');
         screen.textContent = inputs.join('')
+    } else if (screen.textContent == '-') {
+        inputs.length = 0
+        inputs.push('-0');
+        screen.textContent = inputs.join('')
     }
 })
 
 // Listeners for number and operator buttons
 numBtn.forEach((numBtn) => numBtn.addEventListener('click', () => {
-    if ((inputs[0] % 1 !== 0 && inputs[2] % 1 !== 0) && numBtn.value == '.') { // cant add '.' if already has
-        return   
+    // if ((inputs[0] % 1 !== 0 && inputs[2] % 1 !== 0) && numBtn.value == '.') { // cant add '.' if already has
+    //     return   
+    // } else 
+    if (inputs.length >= 1 && inputs.length < 2 && numBtn.value == '.') { // cant add consecutive '.' to 1st operand
+        let grabber = inputs[0]
+        let decTest = grabber.toString();
+        let decArray = Array.from(decTest)
+        if (decArray.includes('.') == true) { // searches to see if '.'
+            return;
+        } else {                              // includes '.' in array[0]
+            inputs.push(numBtn.value);
+            let decJoin = inputs.splice(0, 2);
+            let addDec = decJoin.join("")
+            inputs.push(addDec);
+            screen.textContent = inputs.join(" ");
+        }
+    } else if (inputs.length > 2 && numBtn.value == '.') { // cant add consecutive '.' to 2nd operand
+        let grabber2 = inputs[2]
+        let decTest2 = grabber2.toString();
+        let decArray2 = Array.from(decTest2)
+        if (decArray2.includes('.') == true) { // searches to see if '.'
+            return;
+        } else {                               // include '.' in array[2]
+            inputs.push(numBtn.value);
+            let decJoin = inputs.splice(2, 4);
+            let addDec = decJoin.join("")
+            inputs.push(addDec);
+            screen.textContent = inputs.join(" ");
+        }
     } else if (screen.textContent == '0' && numBtn.value == '0') { // cant add 0 before other #
         return
-    }else if (inputs.length == 2 && numBtn.value == '0') { // cant add 0 before other # in 2nd operand
+    } else if (inputs.length == 2 && numBtn.value == '0') { // cant add 0 before other # in 2nd operand
         return
-    }else if (inputs.length === 1) {
+    } else if (inputs.length === 1) { // add #s to 1st operand by joining to array[0]
         inputs.push(numBtn.value);
         let joiner = inputs.splice(0, 2);
         let secondOperand = joiner.join("")
         inputs.push(secondOperand);
         screen.textContent = inputs.join(" ");
-    } else if (inputs.length === 3) {
+    } else if (inputs.length === 3) { // add #s to 2nd operand by joining to array[2]
         inputs.push(numBtn.value);
         let joiner = inputs.splice(2, 4);
         let secondOperand = joiner.join("")
