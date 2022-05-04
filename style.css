@@ -1,4 +1,4 @@
-body {
+.body {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -11,9 +11,9 @@ body {
     align-items: center;
     width: 375px;
     height: 600px;
-    background-color: rgb(131, 80, 179);
-    border: 15px outset rgb(226, 207, 252);
-    border-radius: 12%;
+    background-color: rgb(112, 79, 143);
+    /* border: 15px outset rgb(226, 207, 252); */
+    border-radius: 7%;
 }
 .symbol {
     display: flex;
@@ -22,7 +22,7 @@ body {
 }
 .screen {
     background-color: rgb(216, 209, 209);
-    border: 8px inset;
+    /* border: 8px inset; */
     width: 320px;
     height: 75px;
     padding: 0px, 10px ,0px, ;
@@ -34,31 +34,37 @@ body {
 .buttonBox {
     display: grid;
     grid-template-columns: auto auto  auto 70px;
-    background-color: rgb(131, 80, 179);
+    background-color: rgb(112, 79, 143);
     margin-top: 20px;
     column-gap: 16px;
     row-gap: 10px;
 }
 button {
-    background-color: rgb(226, 207, 252);
     color: rgb(61, 61, 58);
     font-size: 45px;
     width: 72px;
     height: 72px;
-    border: 2px outset;
-    border-radius: 50%;
+    padding: 0;
+    border: none;
+    background: none;
+    border-radius: 20%;
     text-align: center;
     font-family:Arial, Helvetica, sans-serif
 }
 button:hover {
     transform: scale(1.04);
-
+}
+.numBtn {
+    background-color: rgb(226, 207, 252);
 }
 .opBtn {
-    background-color: rgb(172, 175, 223);
+    background-color: rgb(176, 179, 228);
 }
 .resets {
     background-color: rgb(172, 223, 204);
+}
+.btn {
+    background-color: rgb(226, 207, 252);
 }
 #eval{
     background-color: rgb(223, 172, 219);
