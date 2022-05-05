@@ -22,15 +22,23 @@
     font-size: 40px;
     color: rgb(226, 207, 252);
 }
-.screen {
+.screenBox{
+    display:flex;
+    align-items: center;
     background-color: rgb(223, 223, 223);
     color: rgb(49, 49, 46);
     border: 2px solid rgb(61, 61, 58);
     width: 258px;
     height: 55px;
+}
+.screen {
+    background-color: rgb(223, 223, 223);
+    color: rgb(49, 49, 46);
+    width: 258px;
+    height: 43px;
     text-align:end;
     font-family:Arial, Helvetica, sans-serif;
-    font-size: 39px;
+    font-size: 38px;
     vertical-align:text-bottom;
 }
 .buttonBox {
