@@ -51,7 +51,7 @@ neg.addEventListener('click', () => {
         let pos = removeNeg.replace("-", "");
         inputs.length = 0
         inputs.push(pos);
-        screen.textContent = inputs.join(" ")
+        screen.textContent = inputs.join("")
         return
     } else if(inputs[0] === '0.') {                             // removes '-' and keeps '.'
         inputs.pop();
@@ -66,47 +66,47 @@ neg.addEventListener('click', () => {
         let pos = removeNeg.replace("-", "");
         inputs.length = 0
         inputs.push(pos);
-        screen.textContent = inputs.join(" ")
+        screen.textContent = inputs.join("")
     } else if (inputs[0] > 0 && inputs.length == 1) {       // removes '-' from [0] if already has 
         let addNeg = inputs[0].toString();
         let negSign = '-' + addNeg;
         inputs.length = 0
         inputs.push(negSign);
-        screen.textContent = inputs.join(" ")
+        screen.textContent = inputs.join("")
     } else if (inputs[2] == '-') {                      // removes '-' if [2] only has '-' so far
         inputs.pop()
-        screen.textContent = inputs.join(" ")
+        screen.textContent = inputs.join("")
     }else if (inputs[2] === '0.') {                // removes '-' if [2] is 0.
         inputs.pop()
         inputs[2] = '-0.'
-        screen.textContent = inputs.join(" ")
+        screen.textContent = inputs.join("")
     } else if (inputs[2] === '-0.') {               // removes '-' if [2] is -0.
         inputs.pop()
         inputs[2] = '0.'
-        screen.textContent = inputs.join(" ")
+        screen.textContent = inputs.join("")
     } else if (inputs[2] == '0') {                   // removes '-' if [2] is 0
         inputs.pop()
         inputs[2] = '-0'
-        screen.textContent = inputs.join(" ")
+        screen.textContent = inputs.join("")
     } else if (inputs[2] === '-0') {                // removes '-' if [2] is -0
         inputs.pop()
         inputs[2] = '0'
-        screen.textContent = inputs.join(" ")
+        screen.textContent = inputs.join("")
     } else if (inputs[2] < 0) {                    // removes '-' from [2] if already negative
         let removeNeg2 = inputs[2].toString();
         let pos2 = removeNeg2.replace("-", "");
         inputs.pop();
         inputs.push(pos2);
-        screen.textContent = inputs.join(" ")
+        screen.textContent = inputs.join("")
     } else if (inputs[2] > 0) {                    // adds '-' to [2] if > 0
         let addNeg2 = inputs[2].toString();
         let negSign2 = '-' + addNeg2;
         inputs.pop();
         inputs.push(negSign2);
-        screen.textContent = inputs.join(" ")
+        screen.textContent = inputs.join("")
     } else {                                       // adds '-'
         inputs.push(neg.value)
-        screen.textContent = inputs.join(" ");
+        screen.textContent = inputs.join("");
     }
 })
 
@@ -126,13 +126,16 @@ decimal.addEventListener('click' || 'keydown', () => {
 // Listeners for number buttons
 numBtn.forEach((numBtn) => numBtn.addEventListener('click', () => {
     let screenCount = inputs.toString()
+    // This code deals with equation reseting equation if a number is clicked after solution is on screen
     if (equals.style.backgroundColor == 'rgb(223, 172, 218)' && inputs.length == 1) { // reads when eval()just ran and answer showing
         inputs.pop()                                // resets array if screen currently shows answer to previous proble,
         inputs.push(numBtn.value)                   // so it doesnt just add numers to the answer
         screen.textContent = inputs.join(" ");      // - numbers were just getting tacked on to the answer if you hit numBtn . . .
         equals.style.backgroundColor = 'rgb(223, 172, 219)' // exits color change loop
-    }else if (screenCount.length >= 12) {
+    }else if (screenCount.length >= 12) {  // limits screen display
         return
+
+        // This code deals with when and hwo to add a decimal '.'
     } else if (inputs.length >= 1 && inputs.length < 2 && numBtn.value == '.') { // cant add consecutive '.' [0]
         let grabber = inputs[0]
         let decTest = grabber.toString();
@@ -144,13 +147,12 @@ numBtn.forEach((numBtn) => numBtn.addEventListener('click', () => {
             let decJoin = inputs.splice(0, 2);
             let addDec = decJoin.join("")
             inputs.push(addDec);
-            screen.textContent = inputs.join(" ");
+            screen.textContent = inputs.join("");
         }
     } else if (inputs.length == 2 && numBtn.value == '.') {     // add '0' infront of '.' in [2]
         inputs.push('0.');
-        screen.textContent = inputs.join(" ");
+        screen.textContent = inputs.join("");
     } else if (inputs.length > 2 && numBtn.value == '.') { // cant add consecutive '.' to [2]
-
         let grabber2 = inputs[2]
         let decTest2 = grabber2.toString();
         let decArray2 = Array.from(decTest2)
@@ -161,7 +163,7 @@ numBtn.forEach((numBtn) => numBtn.addEventListener('click', () => {
             let decJoin2 = inputs.splice(2, 4);
             let addDec2 = decJoin2.join("")
             inputs.push(addDec2);
-            screen.textContent = inputs.join(" ");
+            screen.textContent = inputs.join("");
         } else {                                          // include '.' in [2]
             inputs.push(numBtn.value);
             let decJoin3 = inputs.splice(2, 4);
@@ -170,20 +172,33 @@ numBtn.forEach((numBtn) => numBtn.addEventListener('click', () => {
             screen.textContent = inputs.join(" ");
         }
 
+        // This code deals with a number click when screen shows '0'
     } else if ((screen.textContent == '0' || inputs[0] == '0') && numBtn.value == '0') {      // cant add 0 before other #
         return
-    } else if ((inputs.length == 2 || inputs[2] == '0' || inputs[2] == '-0') && numBtn.value == '0') {         // cant add 0 before other # in [2]
+    } else if ((inputs[2] == '0' || inputs[2] == '-0') && numBtn.value == '0') {         // cant consecutive '0' in [2]
         return
-    } else if (inputs[0] == '0') {
+    } else if (inputs[0] == '0') {      // removes '0' for next click
         inputs.pop()
         inputs.push(numBtn.value)
         screen.textContent = inputs.join(" ");
-    } else if (inputs[0] == '-0') {
+    } else if (inputs[0] == '-0') {    // removes '0' for next click if [2] is negative
         let removeNeg = inputs[0].toString();
         let pos = removeNeg.replace("0", numBtn.value);
         inputs.length = 0
         inputs.push(pos);
         screen.textContent = inputs.join(" ")
+    } else if (inputs[2] == '0' && numBtn.value !== '.'){
+        inputs.pop()
+        inputs.push(numBtn.value)
+        screen.textContent = inputs.join(" ");
+    }  else if (inputs[2] == '-0' && numBtn.value !== '.'){
+        let removeNeg = inputs[2].toString();
+        let pos = removeNeg.replace("0", numBtn.value);
+        inputs.pop()
+        inputs.push(pos);
+        screen.textContent = inputs.join(" ")
+
+        //This code deals with adding a number to inputs[0] and inputs[2] 
     } else if (inputs.length === 1) { // add #s to 1st operand by joining to array[0]
         inputs.push(numBtn.value);
         let joiner = inputs.splice(0, 2);
@@ -205,7 +220,8 @@ numBtn.forEach((numBtn) => numBtn.addEventListener('click', () => {
 // Listeners for operator buttons
 opBtn.forEach((opBtn) => opBtn.addEventListener('click', () => {
     let screenCount = inputs.toString()
-    if (screenCount.length >= 11) {
+    if (screenCount.length >= 14) {
+        
         return
     } else if (inputs.length === 3) {
         if (inputs[2] == '-') {
