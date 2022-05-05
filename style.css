@@ -4,15 +4,16 @@
     align-items: center;
     padding: 35px;
     margin-top: 50px;
-    background: rgb(213, 215, 240)
+    background: rgb(188, 182, 206)
 }
 .container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 315px;
-    height: 501px;
-    background-color: rgb(112, 79, 143);
+    width: 294px;
+    height: 420px;
+    background: transparent;
+    padding-top: 20px;
     /* border: 15px outset rgb(226, 207, 252); */
     /* border-radius: 7%; */
 }
@@ -22,33 +23,32 @@
     color: rgb(226, 207, 252);
 }
 .screen {
-    background-color: rgb(216, 209, 209);
-    /* border: 8px inset; */
-    width: 289px;
-    height: 58px;
-    padding: 0px, 10px ,0px, ;
+    background-color: rgb(223, 223, 223);
+    color: rgb(49, 49, 46);
+    border: 2px solid rgb(61, 61, 58);
+    width: 258px;
+    height: 55px;
     text-align:end;
     font-family:Arial, Helvetica, sans-serif;
-    font-size: 40px;
+    font-size: 39px;
     vertical-align:text-bottom;
 }
 .buttonBox {
     display: grid;
-    grid-template-columns: auto auto  auto 70px;
+    grid-template-columns: auto auto  auto 65px;
     background-color: rgb(112, 79, 143);
     margin-top: 20px;
-    border: 1px solid black;
+    border: 1px solid rgb(61, 61, 58);
     /* column-gap: 1px;
     row-gap: 1px; */
 }
 button {
     color: rgb(61, 61, 58);
     font-size: 45px;
-    width: 72px;
-    height: 72px;
-    padding: 0;
+    width: 65px;
+    height: 65px;
     border-width: 1px;
-    border-color:  rgb(0, 0, 0);
+    border-color:  rgb(61, 61, 58);
     background: none;
     /* border-radius: 20%; */
     text-align: center;
@@ -56,7 +56,7 @@ button {
 }
 button:hover {
     transform: scale(1.06);
-    border: 2px solid black;
+    border: 2px solid rgb(61, 61, 58);
 }
 .numBtn {
     background-color: rgb(226, 207, 252);
