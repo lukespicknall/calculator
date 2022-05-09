@@ -94,7 +94,7 @@ neg.addEventListener('click', () => {
 })
 
 // Listeners for '.' button
-decimal.addEventListener('click' || 'keydown', () => {
+decimal.addEventListener('click', () => {
     if (screen.textContent == '0') {            // makes sure a 0 stays infront of '.' always
         inputs.pop()
         inputs.push('0');
@@ -195,6 +195,7 @@ numBtn.forEach((numBtn) => numBtn.addEventListener('click', () => {
     }
 }));
 
+
 // Listeners for operator buttons
 opBtn.forEach((opBtn) => opBtn.addEventListener('click', () => {
     let screenCount = inputs.toString()
@@ -248,9 +249,9 @@ function operate(operator, a, b) {
             return add(a, b)
         case '-':
             return sub(a, b)
-        case '*':
+        case 'x':
             return multiply(a, b)
-        case '/':
+        case '÷':
             return divide(a, b)
     }
 }
@@ -263,3 +264,14 @@ function evaluate() {
     inputs[0] = roundResult;
     equals.style.backgroundColor = 'rgb(223, 172, 218)'; // this is how to tell if screen is currently
 }                                                       //an answer. this interacts with first conditional on numBtn
+
+
+// The begginings of keyboard UI // 
+
+// document.addEventListener('keydown', function(e) {
+//     if (e.key >= 0 && e.key <= 9)  {
+//         inputs.push(e.key)
+//         screen.textContent = inputs.join(" ");
+//     }
+//   });
+
