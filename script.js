@@ -10,9 +10,7 @@ let clear = document.querySelector('#clear');
 let neg = document.querySelector('#neg');
 let inputs = [];
 
-
-screen.textContent = "0";
-let answered = undefined;
+screen.textContent = '0';
 // Listeners for clear and back buttons
 clear.addEventListener('click', () => {
     inputs.length = 0;
@@ -57,7 +55,7 @@ neg.addEventListener('click', () => {
         let negArray = Array.from(negTest)
         if (negArray.includes('-') == true) {   // if inputs[0] has '-', removes it
             negArray.shift();
-            let noNeg = negArray.join("")
+            let noNeg = negArray.join('')
             inputs.pop();
             inputs.push(noNeg);
             screen.textContent = inputs.join(" ");
@@ -78,7 +76,7 @@ neg.addEventListener('click', () => {
         let negArray2 = Array.from(negTest2)
         if (negArray2.includes('-') == true) {      // if inputs[2] has '-', removes it
             negArray2.shift();
-            let noNeg2 = negArray2.join("")
+            let noNeg2 = negArray2.join('')
             inputs.pop();
             inputs.push(noNeg2);
             screen.textContent = inputs.join(" ");
@@ -129,7 +127,7 @@ numBtn.forEach((numBtn) => numBtn.addEventListener('click', () => {
         } else {                                // includes '.' in [0]
             inputs.push(numBtn.value);
             let decJoin = inputs.splice(0, 2);
-            let addDec = decJoin.join("")
+            let addDec = decJoin.join('')
             inputs.push(addDec);
             screen.textContent = inputs.join(" ");
         }
@@ -145,7 +143,7 @@ numBtn.forEach((numBtn) => numBtn.addEventListener('click', () => {
         } else {                                          // include '.' in [2]
             inputs.push(numBtn.value);
             let decJoin3 = inputs.splice(2, 4);
-            let addDec3 = decJoin3.join("")
+            let addDec3 = decJoin3.join('')
             inputs.push(addDec3);
             screen.textContent = inputs.join(" ");
         }
@@ -161,7 +159,7 @@ numBtn.forEach((numBtn) => numBtn.addEventListener('click', () => {
         screen.textContent = inputs.join(" ");
     } else if (inputs[0] == '-0') {    // removes '0' for next click if [2] is negative
         let removeNeg = inputs[0].toString();
-        let pos = removeNeg.replace("0", numBtn.value);
+        let pos = removeNeg.replace('0', numBtn.value);
         inputs.length = 0
         inputs.push(pos);
         screen.textContent = inputs.join(" ")
@@ -180,13 +178,13 @@ numBtn.forEach((numBtn) => numBtn.addEventListener('click', () => {
     } else if (inputs.length === 1) { // add #s to 1st operand by joining to array[0]
         inputs.push(numBtn.value);
         let joiner = inputs.splice(0, 2);
-        let secondOperand = joiner.join("")
+        let secondOperand = joiner.join('')
         inputs.push(secondOperand);
         screen.textContent = inputs.join(" ");
     } else if (inputs.length === 3) { // add #s to 2nd operand by joining to array[2]
         inputs.push(numBtn.value);
         let joiner = inputs.splice(2, 4);
-        let secondOperand = joiner.join("")
+        let secondOperand = joiner.join('')
         inputs.push(secondOperand);
         screen.textContent = inputs.join(" ");
     } else {
@@ -230,15 +228,12 @@ equals.addEventListener('click', () => {
 function add(a, b) {
     return a + b;
 }
-
 function sub(a, b) {
     return a - b;
 }
-
 function multiply(a, b) {
     return a * b;
 }
-
 function divide(a, b) {
     return a / b;
 }
