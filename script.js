@@ -187,8 +187,8 @@ numBtn.forEach((numBtn) => numBtn.addEventListener('click', () => {
     } else if (inputs.length === 1) { // add #s to 1st operand by joining to array[0]
         inputs.push(numBtn.value);
         let joiner = inputs.splice(0, 2);
-        let secondOperand = joiner.join('')
-        inputs.push(secondOperand);
+        let firstOperand = joiner.join('')
+        inputs.push(firstOperand);
         screen.textContent = inputs.join(" ");
     } else if (inputs.length === 3) { // add #s to 2nd operand by joining to array[2]
         inputs.push(numBtn.value);
@@ -272,10 +272,43 @@ function evaluate() {
 
 // The begginings of keyboard UI // 
 
-// document.addEventListener('keydown', function(e) {
-//     if (e.key >= 0 && e.key <= 9)  {
-//         inputs.push(e.key)
-//         screen.textContent = inputs.join(" ");
-//     }
-//   });
+document.addEventListener('keydown', function(e) {
+    if ((e.key >= 0 && e.key <= 9) && (inputs.length === 1 || screen.textContent == '0'))  {
+        inputs.push(e.key)
+        let joiner = inputs.splice(0, 2);
+        let firstOperand = joiner.join('')
+        inputs.push(firstOperand);
+        screen.textContent = inputs.join(" ");
+    }else if ((e.key >= 0 && e.key <= 9) && inputs.length === 3) { // add #s to 2nd operand by joining to array[2]
+        inputs.push(e.key);
+        let joiner = inputs.splice(2, 4);
+        let secondOperand = joiner.join('')
+        inputs.push(secondOperand);
+        screen.textContent = inputs.join(" ");
+    }else if (e.key >= 0 && e.key <= 9){
+        inputs.push(e.key)
+        screen.textContent = inputs.join(" ");
+    }else if (e.key == "Enter") {
+        evaluate();
+        screen.textContent = inputs
+    }else if (e.key == '+' ||e.key == '-' ||e.key == '*' ||e.key == '/') {
+        switch (e.key) {
+            case '+':
+                inputs.push('+')
+                screen.textContent = inputs.join(" ");   
+                break;
+            case '-':
+                inputs.push('-')
+                screen.textContent = inputs.join(" ");
+                break;
+            case '*':
+                inputs.push('x')
+                screen.textContent = inputs.join(" ");
+                break;
+            case '/':
+                inputs.push('÷')
+                screen.textContent = inputs.join(" ");
+        }
+    }
+  });
 
