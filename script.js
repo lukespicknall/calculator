@@ -111,6 +111,15 @@ numBtn.forEach((numBtn) => numBtn.addEventListener('click', () => {
     // This code deals with equation reseting equation if a number is clicked after solution is on screen
     if (equals.style.backgroundColor == 'rgb(223, 172, 218)' && inputs.length == 1) { // reads when eval()just ran and answer showing
         inputs.pop()                                // resets array if screen currently shows answer to previous proble,
+        if (numBtn.value == '.'){                   // puts '0' infront of '.' if '.' is first press after eval()
+            inputs.push(0, numBtn.value) 
+            let decJoin = inputs.splice(0, 2);
+            let addDec = decJoin.join('')
+            inputs.push(addDec);
+            screen.textContent = inputs;
+            equals.style.backgroundColor = 'rgb(223, 172, 219)' // exits color change loop
+            return
+        }
         inputs.push(numBtn.value)                   // so it doesnt just add numers to the answer
         screen.textContent = inputs.join(" ");      // - numbers were just getting tacked on to the answer if you hit numBtn . . .
         equals.style.backgroundColor = 'rgb(223, 172, 219)' // exits color change loop
