@@ -16,6 +16,7 @@ clear.addEventListener('click', () => {
     inputs.length = 0;
     screen.textContent = '0';
     equals.style.backgroundColor = 'rgb(223, 172, 219)' // sets color back to normal from eval() change
+    clear.blur();
 });
 // This code deals with the back button
 back.addEventListener('click', () => {
@@ -41,6 +42,7 @@ back.addEventListener('click', () => {
         inputs.pop();
         screen.textContent = inputs.join(" ")
     }
+    back.blur();
 });
 
 // add and removes negative symbol // 
@@ -89,6 +91,7 @@ neg.addEventListener('click', () => {
             screen.textContent = inputs.join(" ");
         }
     }
+    neg.blur();
 })
 
 // Listeners for '.' button
@@ -200,11 +203,34 @@ numBtn.forEach((numBtn) => numBtn.addEventListener('click', () => {
         inputs.push(numBtn.value)
         screen.textContent = inputs.join(" ");
     }
+    numBtn.blur();
 }));
 
 
+// This is a test to see if i can pull operations out into functions so i can call them for either
+// button clicks or keydowns to remove redundant code
+// I'm hoping to use this model on all events
+// function op(a){    
+//     let screenCount = inputs.toString()
+//     if (screenCount.length >= 14) {
+//         return
+//     } else if (inputs.length === 3) {
+//         if (inputs[2] == '-') {
+//             return
+//         } else {
+//             evaluate()
+//         }
+//     } else if (inputs.length === 0 && screen.textContent == "0") {
+//         return;
+//     } else if (inputs.length === 2) {
+//         return
+//     }
+//     inputs.push(a)
+//     screen.textContent = inputs.join(" ");}
+
 // Listeners for operator buttons
 opBtn.forEach((opBtn) => opBtn.addEventListener('click', () => {
+    // op(opBtn.value);
     let screenCount = inputs.toString()
     if (screenCount.length >= 14) {
 
@@ -222,6 +248,7 @@ opBtn.forEach((opBtn) => opBtn.addEventListener('click', () => {
     }
     inputs.push(opBtn.value)
     screen.textContent = inputs.join(" ");
+    opBtn.blur();
 }));
 
 // Runs math on '=' click
@@ -230,6 +257,7 @@ equals.addEventListener('click', () => {
         return
     }
     evaluate()
+    equals.blur();
 });
 
 
@@ -273,12 +301,31 @@ function evaluate() {
 // The begginings of keyboard UI // 
 
 document.addEventListener('keydown', function(e) {
+    let screenCount = inputs.toString();
+    let cleanCount = screenCount.replace('.', '');
     if ((e.key >= 0 && e.key <= 9) && (inputs.length === 1 || screen.textContent == '0'))  {
         inputs.push(e.key)
         let joiner = inputs.splice(0, 2);
         let firstOperand = joiner.join('')
         inputs.push(firstOperand);
         screen.textContent = inputs.join(" ");
+        if (equals.style.backgroundColor == 'rgb(223, 172, 218)' && inputs.length == 1) { // reads when eval()just ran and answer showing
+            inputs.pop()                                // resets array if screen currently shows answer to previous proble,
+            if (e.key == '.'){                   // puts '0' infront of '.' if '.' is first press after eval()
+                inputs.push(0, e.key) 
+                let decJoin = inputs.splice(0, 2);
+                let addDec = decJoin.join('')
+                inputs.push(addDec);
+                screen.textContent = inputs;
+                equals.style.backgroundColor = 'rgb(223, 172, 219)' // exits color change loop
+                return
+            }
+            inputs.push(e.key)                   // so it doesnt just add numers to the answer
+            screen.textContent = inputs.join(" ");      // - numbers were just getting tacked on to the answer if you hit numBtn . . .
+            equals.style.backgroundColor = 'rgb(223, 172, 219)' // exits color change loop
+    } else if (cleanCount.length >= 13) {  // limits screen display
+        return
+    }
     }else if ((e.key >= 0 && e.key <= 9) && inputs.length === 3) { // add #s to 2nd operand by joining to array[2]
         inputs.push(e.key);
         let joiner = inputs.splice(2, 4);
@@ -292,6 +339,7 @@ document.addEventListener('keydown', function(e) {
         evaluate();
         screen.textContent = inputs
     }else if (e.key == '+' ||e.key == '-' ||e.key == '*' ||e.key == '/') {
+        // op(e.key)
         switch (e.key) {
             case '+':
                 inputs.push('+')
