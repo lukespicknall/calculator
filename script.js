@@ -169,7 +169,11 @@ function neg () {
     }
 }
 
-
+function clear() {
+    inputs.length = 0;
+    screen.textContent = '0';
+    equalsBtn.style.backgroundColor = 'rgb(223, 172, 219)' // sets color back to normal from eval() change
+}
 // Deals with the back button
 function back () {
     let backBreak = inputs.toString();
@@ -229,7 +233,6 @@ function multiply(a, b) {
 function divide(a, b) {
     return a / b;
 }
-
 function operate(operator, a, b) {
     switch (operator) {
         case '+':
