@@ -19,8 +19,9 @@ function num(numval) {
     let cleanCount = screenCount.replace('.', '');
 
     // This code deals with equation reseting equation if a number is clicked after solution is on screen
-    if (equalsBtn.style.backgroundColor == 'rgb(223, 172, 218)' && inputs.length == 1) { // reads when eval()just ran and answer showing
-        inputs.pop()                                // resets array if screen currently shows answer to previous proble,
+    if (equalsBtn.style.backgroundColor == 'rgb(223, 172, 218)' && inputs.length == 1) { // reads when eval()just ran 
+                                                                                        // and answer showing
+        inputs.pop()                                // resets array if screen currently shows answer to previous problem,
         if (numval == '.') {                   // puts '0' infront of '.' if '.' is first press after eval()
             inputs.push(0, numval)
             let decJoin = inputs.splice(0, 2);
@@ -30,8 +31,8 @@ function num(numval) {
             equalsBtn.style.backgroundColor = 'rgb(223, 172, 219)' // exits color change loop
             return
         }
-        inputs.push(numval)                   // so it doesnt just add numers to the answer
-        screen.textContent = inputs.join(" ");      // - numbers were just getting tacked on to the answer if you hit numBtn . . .
+        inputs.push(numval)                   // so it doesnt just add numbers to the answer
+        screen.textContent = inputs.join(" ");      // - numbers were just getting tacked on to the answer if you hit numBtn
         equalsBtn.style.backgroundColor = 'rgb(223, 172, 219)' // exits color change loop
     } else if (cleanCount.length >= 13) {  // limits screen display
         return
@@ -80,11 +81,18 @@ function num(numval) {
         return
     } else if ((inputs[2] == '0' || inputs[2] == '-0') && numval == '0') {         // cant consecutive '0' in [2]
         return
-    } else if (inputs[0] == '0') {      // removes '0' for next click
+    } else if (inputs[0] == '0' && inputs.length == 2) {      // allows you to operate if solution = 0
+        inputs.push(numval)
+        screen.textContent = inputs.join(" ");
+    } 
+    else if (inputs[0] == '0') {      // removes '0' for next click
         inputs.pop()
         inputs.push(numval)
         screen.textContent = inputs.join(" ");
-    } else if (inputs[0] == '-0') {    // removes '0' for next click if [2] is negative
+    } 
+
+    
+    else if (inputs[0] == '-0') {    // removes '0' for next click if [2] is negative
         let removeNeg = inputs[0].toString();
         let pos = removeNeg.replace('0', numval);
         inputs.length = 0
@@ -169,11 +177,13 @@ function neg () {
     }
 }
 
+//Deals with clear button
 function clear() {
     inputs.length = 0;
     screen.textContent = '0';
     equalsBtn.style.backgroundColor = 'rgb(223, 172, 219)' // sets color back to normal from eval() change
 }
+
 // Deals with the back button
 function back () {
     let backBreak = inputs.toString();
@@ -211,9 +221,12 @@ function op(opval) {
         } else {
             evaluate()
         }
-    } else if (inputs.length === 0 && screen.textContent == "0") {
-        return;
-    } else if (inputs.length === 2) {
+    } 
+    else if (inputs.length === 0 && screen.textContent == "0") { // makes it so '0' and operand push 
+        inputs.push('0')                                          // if no button has been pressed yet.
+        screen.textContent = inputs.join(" ");
+    } 
+    else if (inputs.length === 2) {
         return
     }
     inputs.push(opval)
