@@ -93,8 +93,6 @@ function num(numval) {
         inputs.push(numval)
         screen.textContent = inputs.join(" ");
     } 
-
-    
     else if (inputs[0] == '-0') {    // removes '0' for next click if [2] is negative
         let removeNeg = inputs[0].toString();
         let pos = removeNeg.replace('0', numval);
@@ -309,6 +307,7 @@ clearBtn.addEventListener('click', () => {
 
 
 // Keyboard UI // 
+    // use both e.key and e.code to add more specificity to key events on '-'
 
 document.addEventListener('keydown', function (e) {
     if ((e.key >= 0 && e.key <= 9) || e.key == '.') {
@@ -336,32 +335,3 @@ document.addEventListener('keydown', function (e) {
         clear();
     }
 });
-
-// document.addEventListener('keydown', function (e) {
-//     if ((e.code >= 0 && e.code <= 9) || e.code == 'NumpadDecimal') {
-//         num(e.code);
-//     }else if (e.code == 'Minus') {
-//         neg();
-//     } else if ((e.code == '+' || e.code == '-' || e.code == '*' || e.code == '/') && inputs[0] !== '-') {
-//         if(e.code == '*') {
-//             opkey = 'x'
-//         }else if (e.code == '/') {
-//             opkey = '÷'
-//         }else {
-//             opkey = e.code
-//         }
-//         op(opkey);
-//     }else if (e.code == '=' && inputs.length == 1) {
-//         op('+');
-//     }else if (e.code == '=') {
-//         equals();
-//     }else if (e.code == "Enter") {
-//         equals();
-//     }else if (e.code == 'ArrowRight' || e.code == 'Backspace') {
-//         back();
-//     }else if(e.code == 'Delete') {
-//         clear();
-//     }
-// });
-
-
