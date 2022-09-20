@@ -81,11 +81,14 @@ function num(numval) {
         return
     } else if ((inputs[2] == '0' || inputs[2] == '-0') && numval == '0') {         // cant consecutive '0' in [2]
         return
-    } else if (inputs[0] == '0' && inputs.length == 2) {      // allows you to operate if solution = 0
-        inputs.push(numval)
+    } else if (inputs[0] == '0' && inputs.length >= 2) {      // allows you to operate if solution = 0
+        inputs.push(numval);                                  // allows add more num to inputs[2] if[1]=0
+        let joiner = inputs.splice(2, 4);
+        let secondOperand = joiner.join('')
+        inputs.push(secondOperand);
         screen.textContent = inputs.join(" ");
     } 
-    else if (inputs[0] == '0') {      // removes '0' for next click
+    else if (inputs[0] == '0' && inputs.length < 1) {      // removes '0' for next click
         inputs.pop()
         inputs.push(numval)
         screen.textContent = inputs.join(" ");
@@ -310,7 +313,7 @@ clearBtn.addEventListener('click', () => {
 document.addEventListener('keydown', function (e) {
     if ((e.key >= 0 && e.key <= 9) || e.key == '.') {
         num(e.key);
-    }else if ((e.key == '-' && inputs.length == 0) || e.key == '-' && inputs.length == 2) {
+    }else if ((e.key == '-' && inputs.length == 0)  || e.key == '-' && inputs.length == 2) {
         neg();
     } else if ((e.key == '+' || e.key == '-' || e.key == '*' || e.key == '/') && inputs[0] !== '-') {
         if(e.key == '*') {
